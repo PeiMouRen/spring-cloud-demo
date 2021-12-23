@@ -20,6 +20,7 @@
     <spring.boot.version>2.4.2</spring.boot.version>
     <spring.cloud.alibaba.version>2021.1</spring.cloud.alibaba.version>
     <mybatis-plus.version>3.4.3.4</mybatis-plus.version>
+<!--    <mybatis-plus.version>3.4.2</mybatis-plus.version>-->
     <junit.version>4.12</junit.version>
     <log4j.version>1.2.17</log4j.version>
     <lombok.version>1.16.18</lombok.version>
@@ -55,6 +56,19 @@
       </dependency>
 
       <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <scope>test</scope>
+        <version>${junit.version}</version>
+      </dependency>
+
+      <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>${mysql.version}</version>
@@ -71,6 +85,7 @@
         <artifactId>mybatis-plus-boot-starter</artifactId>
         <version>${mybatis-plus.version}</version>
       </dependency>
+
 
     </dependencies>
   </dependencyManagement>
