@@ -4,9 +4,6 @@ import com.rhythm.entities.CommonResult;
 import com.rhythm.entities.Payment;
 import com.rhythm.service.IPaymentService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
-import org.slf4j.LoggerFactory;
-import org.slf4j.impl.StaticLoggerBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,22 +21,22 @@ public class PaymentController {
     private IPaymentService paymentService;
 
     @PostMapping("/payment")
-    public CommonResult create(@RequestBody Payment payment) {
+    public CommonResult<Long> create(@RequestBody Payment payment) {
         if (paymentService.save(payment)) {
             log.info("paymentService插入数据库成功");
-            return new CommonResult(200, "插入支付流水成功，id为：" + payment.getId());
+            return new CommonResult<>(200, "插入支付流水成功", payment.getId());
         }
         log.info("paymentService插入数据库失败");
-        return new CommonResult(501, "插入支付流水失败");
+        return new CommonResult<>(501, "插入支付流水失败");
     }
 
     @GetMapping("/payment/{id}")
-    public CommonResult getPaymentById(@PathVariable("id") Long id) {
+    public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
         Payment payment = paymentService.getById(id);
         log.info("查询结果:" + payment.toString());
         if(payment != null) {
-            return new CommonResult(200, "success", payment);
+            return new CommonResult<>(200, "success", payment);
         }
-        return new CommonResult(501, "没有查询到记录");
+        return new CommonResult<>(501, "没有查询到记录");
     }
 }
