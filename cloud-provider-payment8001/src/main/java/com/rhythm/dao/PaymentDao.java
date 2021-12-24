@@ -18,4 +18,11 @@ import java.util.List;
 @Repository
 public interface PaymentDao extends BaseMapper<Payment> {
 
+    /**
+     * 插入一条记录
+     * @param entity 实体
+     * @return 受影响的行数
+     */
+    @Override
+    int insert(Payment entity);
 }

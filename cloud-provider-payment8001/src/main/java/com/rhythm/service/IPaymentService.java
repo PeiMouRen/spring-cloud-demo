@@ -14,4 +14,11 @@ import com.rhythm.entities.Payment;
  */
 public interface IPaymentService extends IService<Payment> {
 
+    /**
+     * 插入一条数据
+     * @param payment 实体
+     * @return true/false
+     */
+    boolean save(Payment payment);
+
 }

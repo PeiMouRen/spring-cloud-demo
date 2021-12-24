@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rhythm.dao.PaymentDao;
 import com.rhythm.entities.Payment;
 import com.rhythm.service.IPaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +18,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class PaymentServiceImpl extends ServiceImpl<PaymentDao, Payment> implements IPaymentService {
 
+    @Autowired
+    private PaymentDao paymentDao;
+
+    @Override
+    public boolean save(Payment payment) {
+        if (paymentDao.insert(payment) > 0)
+            return true;
+        return false;
+    }
 }

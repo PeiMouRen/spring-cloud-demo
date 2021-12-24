@@ -11,7 +11,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Payment implements Serializable {
 
-    //@TableId(type = IdType.AUTO) // 设置主键自增，生成的主键号会放在传入的实体类中
     private Long id;
     private String serialno;
 }

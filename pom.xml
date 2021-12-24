@@ -13,6 +13,9 @@
   <modules>
     <module>cloud-provider-payment8001</module>
     <module>cloud-consumer-order80</module>
+    <module>cloud-api-commons</module>
+    <module>cloud-eureka-server7001</module>
+    <module>cloud-eureka-server7002</module>
   </modules>
 
   <properties>
@@ -27,6 +30,7 @@
     <lombok.version>1.16.18</lombok.version>
     <mysql.version>5.1.47</mysql.version>
     <druid.version>1.1.16</druid.version>
+    <hutool.version>5.7.17</hutool.version>
   </properties>
 
   <!-- 子模块继承后，锁定子模块的版本（子模块不写version） -->
@@ -87,6 +91,11 @@
         <version>${mybatis-plus.version}</version>
       </dependency>
 
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool.version}</version>
+      </dependency>
 
     </dependencies>
   </dependencyManagement>

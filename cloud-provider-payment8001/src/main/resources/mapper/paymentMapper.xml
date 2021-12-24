@@ -5,8 +5,8 @@
 <!-- namaspace命名空间，与dao下面的接口对应，用于生成dao接口的实现类 -->
 <mapper namespace="com.rhythm.dao.PaymentDao">
 
-    <select id="selectById" resultType="Payment" parameterType="Long">
-        select * from payment where id = #{id}
-    </select>
+    <insert id="insert" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
+        insert into payment(serialno) values (#{serialno})
+    </insert>
 
 </mapper>
