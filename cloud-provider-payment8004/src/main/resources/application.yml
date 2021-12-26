@@ -1,9 +1,9 @@
 server:
-  port: 80
+  port: 8004
 
 spring:
   application:
-    name: cloud-order-service
+    name: cloud-payment-service
   # 配置数据源
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource  # 当前数据源操作类型
@@ -11,16 +11,12 @@ spring:
     username: root
     password: mysql
     url: jdbc:mysql://localhost:3306/cloud_payment_service?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181 # zookeeper服务注册中心地址，集群配置用逗号隔开
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml # mapper文件路径
   type-aliases-package: com.rhythm.entities # 所有Entity别名类所在包
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/ # 指定eureka server地址
-  instance:
-    instance-id: order80  # 配置服务的主机名
-    prefer-ip-address: true # 显示服务ip地址
 

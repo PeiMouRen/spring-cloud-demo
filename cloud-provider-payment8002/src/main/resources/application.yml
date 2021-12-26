@@ -1,9 +1,9 @@
 server:
-  port: 80
+  port: 8002
 
 spring:
   application:
-    name: cloud-order-service
+    name: cloud-payment-service
   # 配置数据源
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource  # 当前数据源操作类型
@@ -21,6 +21,6 @@ eureka:
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/ # 指定eureka server地址
   instance:
-    instance-id: order80  # 配置服务的主机名
+    instance-id: payment8002  # 配置服务的主机名
     prefer-ip-address: true # 显示服务ip地址
 

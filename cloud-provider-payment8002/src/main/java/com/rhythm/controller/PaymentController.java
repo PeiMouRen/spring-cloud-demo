@@ -6,12 +6,7 @@ import com.rhythm.service.IPaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @Author peixi
@@ -28,9 +23,6 @@ public class PaymentController {
 
     @Value("${server.port}")
     private String serverPort;
-
-    @Resource
-    private DiscoveryClient discoveryClient; // 服务发现bean，可获取到eureka注册中心已注册服务的信息
 
     @PostMapping("/payment")
     public CommonResult<Long> create(@RequestBody Payment payment) {
@@ -50,28 +42,5 @@ public class PaymentController {
             return new CommonResult<>(200, "查询payment成功, serverPort: " + serverPort, payment);
         }
         return new CommonResult<>(501, "没有查询到记录");
-    }
-
-    /**
-     * 获取eureka注册中心中已注册服务的信息
-     * @return
-     */
-    @GetMapping("/payment/discovery")
-    public Object discovery() {
-
-        // 获取到注册中心的服务列表
-        List<String> services = discoveryClient.getServices();
-
-        for (String service : services) {
-            log.info("******service: " + service);
-        }
-
-        // 获取到某个服务的实例列表
-        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
-        for (ServiceInstance instance : instances) {
-            log.info(instance.getServiceId() + "\t" + instance.getHost() + "\t" + instance.getPort() + "\t" + instance.getUri());
-        }
-
-        return discoveryClient;
     }
 }

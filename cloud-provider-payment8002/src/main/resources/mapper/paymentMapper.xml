@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namaspace命名空间，与dao下面的接口对应，用于生成dao接口的实现类 -->
+<mapper namespace="com.rhythm.dao.PaymentDao">
+
+    <insert id="insert" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
+        insert into payment(serialno) values (#{serialno})
+    </insert>
+
+</mapper>
