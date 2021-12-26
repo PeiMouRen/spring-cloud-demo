@@ -1,0 +1,11 @@
+zookeeper windows下使用步骤：
+1、下载zookeeper包，3.5版本后下载带bin的二进制文件压缩包，eg：apache-zookeeper-3.5.9-bin.tar.gz
+2、解压后，复制zoo_sample.cfg为zoo.cfg，在与bin同级目录下添加data、log目录，并在zoo.cfg中添加以下配置：
+        dataDir=E:/util/zookeeper/apache-zookeeper-3.5.9-bin/data
+        datalogDir=E:/util/zookeeper/apache-zookeeper-3.5.9-bin/log
+3、启动bin下的zkServer.cmd（默认在8080端口）
+4、启动bin下的zkCli.cmd(默认在2181端口)
+5、参照本模块中的配置注册和调用服务（pom、yml、Main类注解）
+6、在zkCli.cmd窗口中查看、获取服务：
+    ls /
+    get /
