@@ -1,8 +1,6 @@
 package com.rhythm.config;
 
-import com.lbconfig.CustomLoadBalancerConfiguration;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -13,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
  * @Description
  */
 @Configuration
-@LoadBalancerClient(value = "CLOUD-ORDER-SERVICE", configuration = CustomLoadBalancerConfiguration.class)
 public class ApplicationContextConfig {
 
     /**
