@@ -1,0 +1,13 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-order-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/ # 指定eureka server地址
+  instance:
+    instance-id: order80  # 配置服务的主机名
+    prefer-ip-address: true # 显示服务ip地址

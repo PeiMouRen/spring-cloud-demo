@@ -3,11 +3,18 @@ package com.rhythm.controller;
 
 import com.rhythm.entities.CommonResult;
 import com.rhythm.entities.Payment;
+import com.rhythm.lb.LoadBalancer;
+import com.sun.jndi.toolkit.url.Uri;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.net.URI;
+import java.util.List;
 
 /**
  * @Author peixi
@@ -23,15 +30,19 @@ public class OrderController {
 
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private LoadBalancer loadBalancer;
+    @Autowired
+    private DiscoveryClient discoveryClient;
 
     @PostMapping("/consumer/payment")
-    public CommonResult<Payment> create(@RequestBody Payment payment) {
+    public CommonResult<Long> create(@RequestBody Payment payment) {
         log.info("consumer收到的payment：" + payment.toString());
         return restTemplate.postForObject(PAYMENT_URL + "payment", payment, CommonResult.class);
     }
 
     @PostMapping("/consumer/payment/postForEntity")
-    public CommonResult<Payment> createEntity(@RequestBody Payment payment) {
+    public CommonResult<Long> createEntity(@RequestBody Payment payment) {
         log.info("consumer收到的payment：" + payment.toString());
         ResponseEntity<CommonResult> responseEntity = restTemplate.postForEntity(PAYMENT_URL + "payment", payment, CommonResult.class);
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
@@ -54,6 +65,18 @@ public class OrderController {
             return responseEntity.getBody();
         }
         return new CommonResult<>(444, "getForEntity操作失败！");
+    }
+
+    @GetMapping("/consumer/payment/lb")
+    public String getPaymentLb() {
+        List<ServiceInstance> serviceInstances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        if (serviceInstances == null || serviceInstances.size() == 0) {
+            return null;
+        }
+        ServiceInstance serviceInstance = loadBalancer.instances(serviceInstances);
+        URI uri = serviceInstance.getUri();
+        log.info("*****************uri: " + uri);
+        return restTemplate.getForObject(serviceInstance.getUri() + "/payment/lb", String.class);
     }
 
 }
