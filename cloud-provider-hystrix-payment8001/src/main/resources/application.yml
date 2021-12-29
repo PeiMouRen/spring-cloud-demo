@@ -1,0 +1,18 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: cloud-hystrixt-payment-service
+
+eureka:
+  client:
+    service-url:
+      #defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/ # 指定eureka server地址
+      defaultZone: http://eureka7001.com:7001/eureka/
+  instance:
+    instance-id: paymentHystrixt8001  # 配置服务的主机名
+    prefer-ip-address: true # 显示服务ip地址
+#    lease-renewal-interval-in-seconds: 1 # eureka client向eureka server发送心跳的时间间隔，单位秒，默认30秒
+#    lease-expiration-duration-in-seconds: 2 # eureka server最后一次收到eureka client心跳后的等待时间，超时将剔除服务，单位秒，默认90秒
+

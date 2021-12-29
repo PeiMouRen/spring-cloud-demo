@@ -5,7 +5,6 @@ import com.rhythm.entities.Payment;
 import com.rhythm.service.PaymentFeginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -30,5 +29,11 @@ public class OrderController {
     public CommonResult<Payment> getPayment(@PathVariable("id") Long id) {
         log.info("consumer收到的paymentId：" + id);
         return paymentFeginService.getPaymentById(id);
+    }
+
+    @GetMapping("/consumer/feign/timeout")
+    public String paymentFeignTimeout() {
+        // feign默认等待时间是1s，超时将报Timeout错误，可在yml中配置
+        return paymentFeginService.paymentFeignTimeout();
     }
 }

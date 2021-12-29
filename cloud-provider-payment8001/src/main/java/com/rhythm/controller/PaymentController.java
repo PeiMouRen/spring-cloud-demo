@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author peixi
@@ -77,6 +78,20 @@ public class PaymentController {
 
     @GetMapping("/payment/lb")
     public String getLb() {
+        return serverPort;
+    }
+
+    /**
+     * 测试feign超时，让现成睡眠3s
+     * @return
+     */
+    @GetMapping("/payment/feign/timeout")
+    public String paymentFeignTimeout() {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return serverPort;
     }
 }
