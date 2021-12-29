@@ -1,0 +1,26 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-hystrix-order-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/ # 指定eureka server地址
+  instance:
+    instance-id: orderHystrix80  # 配置服务的主机名
+    prefer-ip-address: true # 显示服务ip地址
+
+# feign的时间配置
+feign:
+  client:
+    config:
+      default:
+        #建立连接所用的时间，适用于网络状况正常的情况下，两端连接所需要的时间
+        ConnectTimeOut: 5000
+        #指建立连接后从服务端读取到可用资源所用的时间
+        ReadTimeOut: 5000
+logging:
+  level:
+    com.rhythm.service.PaymentFeginService: debug # feign日志以什么级别监控哪个接口
