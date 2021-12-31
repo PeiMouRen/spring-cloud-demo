@@ -38,4 +38,10 @@ public class PaymentHxtrixController {
     }
 
 
+    @GetMapping("/payment/circuit/{id}")
+    public String paymentCircuitBreak(@PathVariable("id") Integer id) {
+        return paymentService.paymentCircuitBreak(id);
+    }
+
+
 }

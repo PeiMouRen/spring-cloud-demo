@@ -44,8 +44,8 @@ public class PaymentService {
 
     @HystrixCommand(fallbackMethod = "paymentCircuitBreak_fallback", commandProperties = {
             @HystrixProperty(name = "circuitBreaker.enabled", value = "true"), // 是否开启断路器
-            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"), // 请求次数
-            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"), // 时间窗口期
+            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"), // 决定断路器开闭状态的最小请求次数，不达到这个次数，无论失败都少次，断路器都不会打开
+            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"), // 时间窗口期，断路器打开后，sleep的时间，sleep后断路器进入half-open状态，这时断路器会转发其中一个请求，成功则关闭断路器，失败则重新开始sleep
             @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60") // 失败率达到多少后打开断路器
     })
     public String paymentCircuitBreak(Integer id){
