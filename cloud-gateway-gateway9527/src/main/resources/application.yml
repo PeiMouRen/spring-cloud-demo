@@ -7,11 +7,25 @@ spring:
     name: cloud-gateway
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true # 开启从服务注册中心动态创建路由的功能，利用微服务名进行路由
       routes:
         - id: payment_route # 路路由的id，没有固定规则但要求唯一，建议配合service name
-          uri: http://localhost:8001 # 匹配路由后，提供服务的地址
+          uri: lb://CLOUD-PAYMENT-SERVICE # 匹配路由后，提供服务的地址
           predicates:
             - Path=/payment/**  # 断言，路径匹配的进行路由
+            #- After=2022-01-01T14:03:39.331+08:00[Asia/Shanghai] # 该时间用ZonedDateTime生成
+            #- Before=2022-01-01T14:03:39.331+08:00[Asia/Shanghai]
+            #- Between=2022-01-01T14:03:39.331+08:00[Asia/Shanghai], 2022-01-01T14:03:39.331+08:00[Asia/Shanghai]
+            #- Cookie=username, peix
+            #- Header=X-Request-Id, \d+ # 要求请求头带X-Request-Id属性，并且值为整数的正则表达式
+            #- Host=**.rhythm.com # 请求头中包含Host，且值匹配**.rhythm.com
+            #- Method=GET,POST
+            #- Query=username, xzpei # 请求包含red其值与正则gree.表达式匹配
+          filters:
+            #- AddRequestHeader=X-Request-red, blue # 会在请求前将X-Request-red=blue加到requestHeader中
+
 
 eureka:
   client:

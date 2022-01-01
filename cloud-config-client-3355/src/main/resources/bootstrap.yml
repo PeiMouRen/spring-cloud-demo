@@ -1,0 +1,33 @@
+server:
+  port: 3355
+
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      label: master #　分支
+      name: config # 获取远程配置的名称，与profile配合使用 config-dev
+      profile: dev # 获取远程配置文件的文件后缀名 dev test prod
+      uri: http://config-3344.com:3344 # 远程配置中心地址
+      # label name profile uri配置效果：http://config-3344.com:3344/master/config-dev.yml
+  rabbitmq: # rabbitMQ配置
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/
+  instance:
+    instance-id: configClient3355  # 配置服务的主机名
+    prefer-ip-address: true # 显示服务ip地址
+
+# 暴露监控端点 需引入spring-boot-starter-actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -1,0 +1,39 @@
+server:
+  port: 3344
+
+spring:
+  application:
+    name: cloud-config-server
+  cloud:
+    config:
+      label: master # 分支
+      server:
+        git:
+          uri: https://github.com/PeiMouRen/springcloud-config.git # git仓库名称
+          search-paths: # 搜索目录
+            - springcloud-config
+          skipSslValidation: true #　跳过ssl验证
+          timeout: 10 # 超时时间，单位秒
+  rabbitmq: # rabbitMQ配置
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/
+  instance:
+    instance-id: configCenter3344  # 配置服务的主机名
+    prefer-ip-address: true # 显示服务ip地址
+
+## rabbitMQ相关配置，暴露bus刷新配置的端点
+management:
+  endpoints:
+    web:
+      exposure:
+        # curl -X POST "http://config-3344.com:3344/actuator/bus-refresh 通知全部config client刷新配置
+        # curl -X POST "http://config-3344.com:3344/actuator/bus-refresh/config-client:3355 定点通知3355刷新配置，spring.application.name:server.port
+        include: 'bus-refresh'
