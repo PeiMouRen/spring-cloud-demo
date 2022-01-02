@@ -11,6 +11,11 @@ spring:
     username: root
     password: mysql
     url: jdbc:mysql://localhost:3306/cloud_payment_service?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+  zipkin: # sleuth + zipkin 实现链路追踪
+    base-url: http://localhost:9411/
+  sleuth:
+    sampler:
+      probability: 1 # 采样率，值介于0到1之间，1表示全部采集
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml # mapper文件路径
@@ -26,4 +31,3 @@ eureka:
     prefer-ip-address: true # 显示服务ip地址
 #    lease-renewal-interval-in-seconds: 1 # eureka client向eureka server发送心跳的时间间隔，单位秒，默认30秒
 #    lease-expiration-duration-in-seconds: 2 # eureka server最后一次收到eureka client心跳后的等待时间，超时将剔除服务，单位秒，默认90秒
-
