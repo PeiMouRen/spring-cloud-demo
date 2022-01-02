@@ -1,0 +1,17 @@
+server:
+  port: 83
+
+spring:
+  application:
+    name: cloudalibaba-consumer-order
+  cloud:
+    nacos: # ali nacos 配置
+      discovery:
+        server-addr: localhost:8848
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

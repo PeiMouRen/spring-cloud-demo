@@ -1,14 +1,10 @@
-import com.rhythm.PaymentMain8001;
+import com.rhythm.PaymentProviderMain9001;
 import com.rhythm.dao.PaymentDao;
 import com.rhythm.entities.Payment;
-import com.rhythm.service.IPaymentService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.time.ZonedDateTime;
-import java.util.List;
 
 /**
  * @Author peixi
@@ -16,13 +12,11 @@ import java.util.List;
  * @Description
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = PaymentMain8001.class)
+@SpringBootTest(classes = PaymentProviderMain9001.class)
 public class Test {
 
     @Autowired
     private PaymentDao paymentDao;
-    @Autowired
-    private IPaymentService paymentService;
 
     @org.junit.Test
     public void test() {
