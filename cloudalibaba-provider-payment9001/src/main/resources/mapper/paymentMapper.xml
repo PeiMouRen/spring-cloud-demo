@@ -9,4 +9,8 @@
         insert into payment(serialno) values ("${serialno}ddd")
     </insert>
 
+    <delete id="del" parameterType="Long">
+        delete from payment where id = #{id}
+    </delete>
+
 </mapper>

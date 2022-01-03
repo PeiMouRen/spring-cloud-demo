@@ -1,0 +1,19 @@
+server:
+  port: 3377
+
+spring:
+  application:
+    name: cloudalibaba-config-client
+  cloud:
+    nacos: # ali nacos 配置
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml #　指定配置文件的格式为yaml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

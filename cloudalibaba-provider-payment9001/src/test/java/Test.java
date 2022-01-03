@@ -26,10 +26,12 @@ public class Test {
 //        }
 //        Payment payment = paymentDao.selectById(2l);
 //        System.out.println(payment);
-        Payment payment = new Payment();
+       /* Payment payment = new Payment();
         payment.setSerialno("bbccbb");
         System.out.println(paymentDao.insert(payment));
-        System.out.println(payment.getId());
+        System.out.println(payment.getId());*/
+
+        paymentDao.del(2l);
 
     }
 

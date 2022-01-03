@@ -22,4 +22,6 @@ public interface PaymentDao extends BaseMapper<Payment> {
      */
     @Override
     int insert(Payment entity);
+
+    int del(Long id);
 }
