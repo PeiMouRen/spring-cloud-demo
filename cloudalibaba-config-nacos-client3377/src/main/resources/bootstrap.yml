@@ -8,9 +8,12 @@ spring:
     nacos: # ali nacos 配置
       discovery:
         server-addr: localhost:8848
+        namespace: dev_namespace # 指定命名空间id
       config:
         server-addr: localhost:8848
         file-extension: yaml #　指定配置文件的格式为yaml
+        group: DEV_GROUP # 指定config group
+        namespace: dev_namespace # 指定命名空间id
 
 management:
   endpoints:
