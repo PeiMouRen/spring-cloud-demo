@@ -1,0 +1,23 @@
+server:
+  port: 9003
+
+spring:
+  application:
+    name: cloudalibaba-payment-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8085
+        port: 8719 # 默认端口为8719，若端口被占用，则会+1向后扫描可用的端口
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
