@@ -2,6 +2,7 @@ package com.rhythm.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.rhythm.handler.MyHandler;
+import com.rhythm.service.IPaymentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,8 @@ public class OrderController {
 
     @Resource
     private RestTemplate restTemplate;
+    @Resource
+    private IPaymentService paymentService;
 
     @GetMapping("order/payment/{id}")
     @SentinelResource(value = "payment",
@@ -36,5 +39,22 @@ public class OrderController {
             throw new NullPointerException("空指针异常");
         }
         return restTemplate.getForObject(PAYMENTURL + "/payment", String.class);
+    }
+
+
+    @GetMapping("/order/feign/payment/{id}")
+    /*@SentinelResource(value = "payment",
+            blockHandlerClass = MyHandler.class,
+            blockHandler = "blockHandler",
+            fallbackClass = MyHandler.class,
+            fallback = "fallback",
+            exceptionsToIgnore = IllegalArgumentException.class)*/
+    public String getPayment2(@PathVariable("id") Long id) {
+        if (id == 4) {
+            throw new IllegalArgumentException("非法参数异常");
+        } else if (id == 5) {
+            throw new NullPointerException("空指针异常");
+        }
+        return paymentService.getPayment();
     }
 }

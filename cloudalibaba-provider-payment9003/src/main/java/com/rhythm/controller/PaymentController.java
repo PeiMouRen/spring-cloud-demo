@@ -15,7 +15,7 @@ public class PaymentController {
     @Value("${server.port}")
     private String serverPort;
 
-    @GetMapping("payment")
+    @GetMapping("/payment")
     public String getPayment() {
         return "hello payment, " + serverPort;
     }

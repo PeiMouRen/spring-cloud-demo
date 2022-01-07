@@ -13,6 +13,9 @@ spring:
         dashboard: localhost:8085
         port: 8719 # 默认端口为8719，若端口被占用，则会+1向后扫描可用的端口
 
+feign:
+  sentinel:
+    enabled: true # 开启feign整合sentinel
 
 
 management:

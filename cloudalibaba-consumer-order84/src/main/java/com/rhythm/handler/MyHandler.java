@@ -10,10 +10,10 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 public class MyHandler {
 
     public static String fallback(Long id, Throwable throwable) {
-        return "id: " + id + " ," + throwable.getMessage();
+        return "id: " + id + " ,fallback handler" + throwable.getMessage();
     }
 
     public static String blockHandler(Long id, BlockException exception) {
-        return "id: " + id + " ," + exception.getMessage();
+        return "id: " + id + " ,block handler!!!" + exception.getMessage();
     }
 }
